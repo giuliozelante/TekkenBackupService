@@ -198,3 +198,4 @@ cwallet.sso.lck
 hs_err_pid*
 
 src/test/
+config.properties
