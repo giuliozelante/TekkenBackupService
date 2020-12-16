@@ -42,18 +42,19 @@ public class FXMLController implements Initializable {
     }
 
     private EventHandler<ActionEvent> enableTxtFldCurrConfigDir() {
-        return setTxtFieldAndBtn(false, "Save", saveCurrentSaveDir());
+        return e -> {
+            txtFldCurrConfigDir.setDisable(false);
+            btnEdit.setText("Save");
+            btnEdit.setOnAction(saveCurrentSaveDir());
+        };
     }
 
     private EventHandler<ActionEvent> saveCurrentSaveDir() {
-        return setTxtFieldAndBtn(true, lblBtnEdit, enableTxtFldCurrConfigDir());
-    }
-
-    private EventHandler<ActionEvent> setTxtFieldAndBtn(boolean b, String save, EventHandler<ActionEvent> actionEventEventHandler) {
         return e -> {
-            txtFldCurrConfigDir.setDisable(b);
-            btnEdit.setText(save);
-            btnEdit.setOnAction(actionEventEventHandler);
+            txtFldCurrConfigDir.setDisable(true);
+            btnEdit.setText(lblBtnEdit);
+            btnEdit.setOnAction(enableTxtFldCurrConfigDir());
+
         };
     }
 }
