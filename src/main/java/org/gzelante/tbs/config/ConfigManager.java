@@ -6,23 +6,28 @@ import org.apache.commons.configuration2.FileBasedConfiguration;
 import org.apache.commons.configuration2.PropertiesConfiguration;
 import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
 import org.apache.commons.configuration2.builder.fluent.Parameters;
+import org.apache.commons.configuration2.ex.ConfigurationException;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.Serializable;
 
 @Data
 public class ConfigManager  implements Serializable {
-
+    private static final Logger logger = LogManager.getLogger();
     private static final long serialVersionUID = -7604766932017737115L;
+
 
     private Parameters parameters;
     private Configuration config;
     public static final String SUFFIX = ".save.game.data.location";
     public static final String CURRENT_PREFIX = "current";
+    private FileBasedConfigurationBuilder<FileBasedConfiguration> builder;
 
     private ConfigManager(){
         parameters = new Parameters();
-        FileBasedConfigurationBuilder<FileBasedConfiguration> builder =
+        this.builder =
                 new FileBasedConfigurationBuilder<FileBasedConfiguration>(PropertiesConfiguration.class)
                         .configure(parameters.properties()
                                 .setFileName("config.properties"));
@@ -36,11 +41,11 @@ public class ConfigManager  implements Serializable {
                     config.getString(ConfigManager.CURRENT_PREFIX + ConfigManager.SUFFIX) :
                     config.getString(System.getProperty("os.name").toLowerCase()
                             .split("\\s")[0] + ConfigManager.SUFFIX));
-            builder.save();
+            this.builder.save();
         }
         catch(org.apache.commons.configuration2.ex.ConfigurationException cex)
         {
-            // loading of the configuration file failed
+            logger.error(cex.getMessage(), cex);
         }
     }
 
@@ -50,5 +55,10 @@ public class ConfigManager  implements Serializable {
 
     public static ConfigManager getInstance(){
         return SingletonHelper.instance;
+    }
+
+    public void save() throws ConfigurationException {
+        this.builder.save();
+
     }
 }

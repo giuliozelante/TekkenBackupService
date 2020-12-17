@@ -9,6 +9,9 @@ import javafx.scene.control.TextField;
 import javafx.event.EventHandler;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Screen;
+import org.apache.commons.configuration2.ex.ConfigurationException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.gzelante.tbs.config.ConfigManager;
 
 import java.awt.*;
@@ -16,7 +19,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class FXMLController implements Initializable {
-
+    private static final Logger logger = LogManager.getLogger();
     @FXML
     private Label labelCurrConfigDir;
     @FXML
@@ -31,10 +34,12 @@ public class FXMLController implements Initializable {
 
     private String lblBtnEdit;
 
+    private ConfigManager configManager;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ConfigManager configManager = ConfigManager.getInstance();
-        txtFldCurrConfigDir.setText(configManager.getConfig().getString(ConfigManager.CURRENT_PREFIX + ConfigManager.SUFFIX));
+        this.configManager = ConfigManager.getInstance();
+        this.txtFldCurrConfigDir.setText(configManager.getConfig().getString(ConfigManager.CURRENT_PREFIX + ConfigManager.SUFFIX));
         this.lblBtnEdit = btnEdit.getText();
         this.mainPane.setMinWidth(Screen.getPrimary().getBounds().getWidth()*0.5);
         this.mainPane.setMinHeight(Screen.getPrimary().getBounds().getHeight()*0.5);
@@ -43,18 +48,27 @@ public class FXMLController implements Initializable {
 
     private EventHandler<ActionEvent> enableTxtFldCurrConfigDir() {
         return e -> {
-            txtFldCurrConfigDir.setDisable(false);
-            btnEdit.setText("Save");
-            btnEdit.setOnAction(saveCurrentSaveDir());
+            editBtnModifier(false, "Save", saveCurrentSaveDir());
         };
     }
 
     private EventHandler<ActionEvent> saveCurrentSaveDir() {
         return e -> {
-            txtFldCurrConfigDir.setDisable(true);
-            btnEdit.setText(lblBtnEdit);
-            btnEdit.setOnAction(enableTxtFldCurrConfigDir());
-
+            editBtnModifier(true, lblBtnEdit, enableTxtFldCurrConfigDir());
+            this.configManager.getConfig().setProperty(ConfigManager.CURRENT_PREFIX + ConfigManager.SUFFIX, this.txtFldCurrConfigDir.getText());
+            try {
+                this.configManager.save();
+            } catch (ConfigurationException configurationException) {
+                logger.error(configurationException.getMessage(), configurationException);
+            }
         };
     }
+
+    private void editBtnModifier(boolean b, String save, EventHandler<ActionEvent> actionEventEventHandler) {
+        txtFldCurrConfigDir.setDisable(b);
+        btnEdit.setText(save);
+        btnEdit.setOnAction(actionEventEventHandler);
+    }
+
+
 }
