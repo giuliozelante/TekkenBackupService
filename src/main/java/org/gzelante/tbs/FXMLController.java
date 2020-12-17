@@ -44,6 +44,7 @@ public class FXMLController implements Initializable {
         this.mainPane.setMinWidth(Screen.getPrimary().getBounds().getWidth()*0.5);
         this.mainPane.setMinHeight(Screen.getPrimary().getBounds().getHeight()*0.5);
         this.btnEdit.setOnAction(enableTxtFldCurrConfigDir());
+        this.btnReset.setOnAction(resetCurrentSaveDirTxtFld());
     }
 
     private EventHandler<ActionEvent> enableTxtFldCurrConfigDir() {
@@ -55,12 +56,23 @@ public class FXMLController implements Initializable {
     private EventHandler<ActionEvent> saveCurrentSaveDir() {
         return e -> {
             editBtnModifier(true, lblBtnEdit, enableTxtFldCurrConfigDir());
-            this.configManager.getConfig().setProperty(ConfigManager.CURRENT_PREFIX + ConfigManager.SUFFIX, this.txtFldCurrConfigDir.getText());
-            try {
-                this.configManager.save();
-            } catch (ConfigurationException configurationException) {
-                logger.error(configurationException.getMessage(), configurationException);
-            }
+            this.setSaveDir();
+        };
+    }
+
+    private void setSaveDir() {
+        this.configManager.getConfig().setProperty(ConfigManager.CURRENT_PREFIX + ConfigManager.SUFFIX, this.txtFldCurrConfigDir.getText());
+        try {
+            this.configManager.save();
+        } catch (ConfigurationException configurationException) {
+            logger.error(configurationException.getMessage(), configurationException);
+        }
+    }
+
+    private EventHandler<ActionEvent> resetCurrentSaveDirTxtFld() {
+        return event -> {
+            this.txtFldCurrConfigDir.setText(this.configManager.getDefaultOSSaveDir());
+            this.setSaveDir();
         };
     }
 

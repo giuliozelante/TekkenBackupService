@@ -59,6 +59,9 @@ public class ConfigManager  implements Serializable {
 
     public void save() throws ConfigurationException {
         this.builder.save();
+    }
 
+    public String getDefaultOSSaveDir() {
+        return config.getString(System.getProperty("os.name").toLowerCase().split("\\s")[0] + ConfigManager.SUFFIX);
     }
 }
