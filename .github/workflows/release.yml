@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: checkout
-        uses: actions/checkout@latest
+        uses: actions/checkout@v2
 
       # No need to install normal Java, you can build application only with GraalVM
       - name: setup GraalVM
