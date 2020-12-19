@@ -3,6 +3,7 @@ plugins {
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.9'
     id 'io.freefair.lombok' version '5.3.0'
+    id "com.palantir.graal" version "0.7.2"
 }
 
 javafx {
@@ -26,3 +27,8 @@ dependencies {
 }
 
 mainClassName = 'org.gzelante.tbs.MainApp'
+
+graal {
+    mainClass 'org.gzelante.tbs.MainApp'
+    outputName 'tekken-backup-service'
+}
