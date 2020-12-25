@@ -4,10 +4,14 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.9'
     id 'io.freefair.lombok' version '5.3.0'
     id "com.palantir.graal" version "0.7.2"
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
+    id 'com.gluonhq.client-gradle-plugin' version '0.1.35'
 }
 
+import org.apache.tools.ant.taskdefs.condition.Os
+
 javafx {
-    version = '15.0.1'
+    version = '11.0.2'
     modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
@@ -16,6 +20,7 @@ version '0.0.1-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
@@ -31,4 +36,16 @@ mainClassName = 'org.gzelante.tbs.MainApp'
 graal {
     mainClass 'org.gzelante.tbs.MainApp'
     outputName 'tekken-backup-service'
+    graalVersion "20.3.0"
+    javaVersion "11"
+
+    //option "--no-fallback"
+    //option "--allow-incomplete-classpath"
+
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        // May be possible without, but autodetection is problematic on Windows 10
+        // see https://github.com/palantir/gradle-graal
+        // see https://www.graalvm.org/docs/reference-manual/native-image/#prerequisites
+        windowsVsVarsPath("H:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat")
+    }
 }
