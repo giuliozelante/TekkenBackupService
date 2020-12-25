@@ -27,12 +27,12 @@ jobs:
           gluon-license: ${{ secrets.GLUON_LICENSE }}
 
       - name: Gluon Build
-        run: mvn -Pdesktop client:build client:package
+        run: grdle nativeBuild
         env:
           GRAALVM_HOME: ${{ env.JAVA_HOME }}
 
       - name: Copy native client to staging
-        run: cp -r target/client/x86_64-linux/HelloGluon* staging
+        run: cp -r build/client/windows/TekkenBackupService* staging
 
       - name: Upload
         uses: actions/upload-artifact@v2
