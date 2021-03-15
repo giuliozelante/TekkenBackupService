@@ -7,8 +7,9 @@ plugins {
 }
 
 import org.apache.tools.ant.taskdefs.condition.Os
+import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 
-def currentOS = org.gradle.nativeplatform.platform.internal.DefaultNativePlatform.currentOperatingSystem;
+def currentOS = DefaultNativePlatform.currentOperatingSystem;
 def platform
 if (currentOS.isWindows()) {
     platform = 'win'
