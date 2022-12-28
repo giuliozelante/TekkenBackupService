@@ -28,7 +28,7 @@ jobs:
         uses: gluonhq/gluon-build-license@v1
         with:
           gluon-license: ${{ secrets.GLUON_LICENSE }}
-
+          
       - name: Build with Gradle
         run: ./gradlew build
 
@@ -43,3 +43,16 @@ jobs:
         with:
           name: Package
           path: staging
+
+      # download the JAR from job 'build'
+      - uses: actions/download-artifact@v2
+        with:
+          path: staging
+
+      # upload it to the release corresponding to the current Git tag (2)
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: TekkenBackupService*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
