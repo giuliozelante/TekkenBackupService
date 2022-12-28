@@ -28,14 +28,15 @@ jobs:
         uses: gluonhq/gluon-build-license@v1
         with:
           gluon-license: ${{ secrets.GLUON_LICENSE }}
+          
+      - name: Build with Gradle
+        run: ./gradlew build
 
-      - name: Gluon Build
-        run: gradle nativeBuild
-        env:
-          GRAALVM_HOME: ${{ env.JAVA_HOME }}
+      - name: Package with Gradle
+        run: ./gradlew package
 
       - name: Copy native client to staging
-        run: cp -r build/client/x86_64-windows/TekkenBackupService* staging
+        run: cp -r build/libs/<project_name>.jar staging
 
       - name: Upload
         uses: actions/upload-artifact@v2

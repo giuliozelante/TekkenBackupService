@@ -26,29 +26,17 @@ jobs:
         with:
           gluon-license: ${{ secrets.GLUON_LICENSE }}
 
-      - name: Gluon Build
-        run: gradle nativeBuild
-        env:
-          GRAALVM_HOME: ${{ env.JAVA_HOME }}
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Package with Gradle
+        run: ./gradlew package
 
       - name: Copy native client to staging
-        run: cp -r build/client/x86_64-darwin/TekkenBackupService* staging
+        run: cp -r build/libs/<project_name>.jar staging
 
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
           name: Package
           path: staging
-
-      # download the JAR from job 'build'
-      - uses: actions/download-artifact@v2
-        with:
-          path: staging
-
-      # upload it to the release corresponding to the current Git tag (2)
-      - name: Create GitHub release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: TekkenBackupService*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

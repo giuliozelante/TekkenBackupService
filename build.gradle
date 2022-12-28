@@ -1,30 +1,16 @@
 plugins {
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.9'
-    id 'io.freefair.lombok' version '5.3.0'
-    id "com.palantir.graal" version "0.7.2"
-    id 'com.gluonhq.client-gradle-plugin' version '0.1.35'
+    id 'org.openjfx.javafxplugin' version '0.0.11'
+    id 'com.gluonhq.gluonfx-gradle-plugin' version '1.0.11'
+    id 'io.freefair.lombok' version '6.3.0'
+    id "com.palantir.graal" version "0.10.0"
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
-import org.apache.tools.ant.taskdefs.condition.Os
-import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
-
-def currentOS = DefaultNativePlatform.currentOperatingSystem;
-def platform
-if (currentOS.isWindows()) {
-    platform = 'win'
-} else if (currentOS.isLinux()) {
-    platform = 'linux'
-} else if (currentOS.isMacOsX()) {
-    platform = 'mac'
-}
-
-java {
-    modularity.inferModulePath = true
-}
+// import org.apache.tools.ant.taskdefs.condition.Os
 
 javafx {
-    version = '15.0.1'
+    version = '16'
     modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
@@ -33,47 +19,45 @@ version '0.0.1-SNAPSHOT'
 
 repositories {
     mavenCentral()
-    jcenter()
+}
+
+run {
+    jvmArgs=["-agentlib:native-image-agent=config-merge-dir=src/main/resources/META-INF/native-image"]
 }
 
 dependencies {
     implementation group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.4'
     implementation group: 'org.apache.commons', name: 'commons-configuration2', version: '2.7'
-    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.14.0'
-    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.14.0'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.14.1'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.14.1'
     testImplementation group: 'junit', name: 'junit', version: '4.12'
-
-    runtimeOnly "org.openjfx:javafx-base:15.0.1:${platform}"
-    runtimeOnly "org.openjfx:javafx-controls:15.0.1:${platform}"
-    runtimeOnly "org.openjfx:javafx-graphics:15.0.1:${platform}"
-    runtimeOnly "org.openjfx:javafx-fxml:15.0.1:${platform}"
 }
 
 mainClassName = 'org.gzelante.tbs.MainApp'
-
-jar {
-    manifest {
-        attributes 'Multi-Release': 'true'
-        attributes 'Main-Class': 'org.gzelante.tbs.Launcher'
-    }
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-}
-
+// graalvmHome = "C:\\Users\\neo16\\scoop\\apps\\graalvm-lts-jdk11\\current\\"
+/*
 graal {
-    mainClass mainClassName
+    mainClass 'org.gzelante.tbs.MainApp'
     outputName 'tekken-backup-service'
-    graalVersion "20.3.0"
+    graalVersion "21.0.0.2"
     javaVersion "11"
 
-    option "--no-fallback"
+    //option "--no-fallback"
     //option "--allow-incomplete-classpath"
 
     if (Os.isFamily(Os.FAMILY_WINDOWS)) {
         // May be possible without, but autodetection is problematic on Windows 10
         // see https://github.com/palantir/gradle-graal
         // see https://www.graalvm.org/docs/reference-manual/native-image/#prerequisites
-        windowsVsVarsPath("C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat")
+        windowsVsVarsPath("G:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat")
     }
 }
+
+
+nativeCompile.doFirst {
+    ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "echo", "\"inizio programma\"")
+    Map<String, String> env = processBuilder.environment()
+    env.each { k,v -> println "$k : $v" }
+    env.put("GRAALVM_HOME", "C:\\Users\\neo16\\scoop\\apps\\graalvm-lts-jdk11\\current\\")
+    processBuilder.start().waitFor()
+}*/
