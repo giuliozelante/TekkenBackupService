@@ -1,6 +1,7 @@
 package org.gzelante.tbs.config;
 
 import lombok.Data;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.FileBasedConfiguration;
 import org.apache.commons.configuration2.PropertiesConfiguration;
@@ -14,8 +15,8 @@ import org.apache.logging.log4j.Logger;
 import java.io.Serializable;
 
 @Data
+@Log4j2
 public class ConfigManager  implements Serializable {
-    private static final Logger logger = LogManager.getLogger();
     private static final long serialVersionUID = -7604766932017737115L;
 
 
@@ -45,7 +46,7 @@ public class ConfigManager  implements Serializable {
         }
         catch(org.apache.commons.configuration2.ex.ConfigurationException cex)
         {
-            logger.error(cex.getMessage(), cex);
+            log.error(cex.getMessage(), cex);
         }
     }
 

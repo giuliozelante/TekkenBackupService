@@ -26,17 +26,17 @@ jobs:
         with:
           gluon-license: ${{ secrets.GLUON_LICENSE }}
 
-      - name: Gluon Build
-        run: mvn -Pdesktop client:build client:package
-        env:
-          GRAALVM_HOME: ${{ env.JAVA_HOME }}
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Package with Gradle
+        run: ./gradlew package
 
       - name: Copy native client to staging
-        run: cp -r target/client/x86_64-darwin/HelloGluon* staging
+        run: cp -r build/libs/<project_name>.jar staging
 
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
           name: Package
           path: staging
-

@@ -1,25 +1,23 @@
 package org.gzelante.tbs;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.event.EventHandler;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Screen;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.configuration2.ex.ConfigurationException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.gzelante.tbs.config.ConfigManager;
 
-import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+@Log4j2
 public class FXMLController implements Initializable {
-    private static final Logger logger = LogManager.getLogger();
     @FXML
     private Label labelCurrConfigDir;
     @FXML
@@ -65,7 +63,7 @@ public class FXMLController implements Initializable {
         try {
             this.configManager.save();
         } catch (ConfigurationException configurationException) {
-            logger.error(configurationException.getMessage(), configurationException);
+            log.error(configurationException.getMessage(), configurationException);
         }
     }
 
