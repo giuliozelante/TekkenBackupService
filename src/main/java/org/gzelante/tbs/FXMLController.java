@@ -1,5 +1,11 @@
 package org.gzelante.tbs;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import org.apache.commons.configuration2.ex.ConfigurationException;
+import org.gzelante.tbs.config.ConfigManager;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -9,14 +15,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Screen;
-import lombok.extern.log4j.Log4j2;
-import org.apache.commons.configuration2.ex.ConfigurationException;
-import org.gzelante.tbs.config.ConfigManager;
+import lombok.extern.slf4j.Slf4j;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-@Log4j2
+@Slf4j
 public class FXMLController implements Initializable {
     @FXML
     private Label labelCurrConfigDir;
@@ -37,18 +38,17 @@ public class FXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.configManager = ConfigManager.getInstance();
-        this.txtFldCurrConfigDir.setText(configManager.getConfig().getString(ConfigManager.CURRENT_PREFIX + ConfigManager.SUFFIX));
+        this.txtFldCurrConfigDir
+                .setText(configManager.getConfig().getString(ConfigManager.CURRENT_PREFIX + ConfigManager.SUFFIX));
         this.lblBtnEdit = btnEdit.getText();
-        this.mainPane.setMinWidth(Screen.getPrimary().getBounds().getWidth()*0.5);
-        this.mainPane.setMinHeight(Screen.getPrimary().getBounds().getHeight()*0.5);
+        this.mainPane.setMinWidth(Screen.getPrimary().getBounds().getWidth() * 0.5);
+        this.mainPane.setMinHeight(Screen.getPrimary().getBounds().getHeight() * 0.5);
         this.btnEdit.setOnAction(enableTxtFldCurrConfigDir());
         this.btnReset.setOnAction(resetCurrentSaveDirTxtFld());
     }
 
     private EventHandler<ActionEvent> enableTxtFldCurrConfigDir() {
-        return e -> {
-            editBtnModifier(false, "Save", saveCurrentSaveDir());
-        };
+        return e -> editBtnModifier(false, "Save", saveCurrentSaveDir());
     }
 
     private EventHandler<ActionEvent> saveCurrentSaveDir() {
@@ -59,7 +59,8 @@ public class FXMLController implements Initializable {
     }
 
     private void setSaveDir() {
-        this.configManager.getConfig().setProperty(ConfigManager.CURRENT_PREFIX + ConfigManager.SUFFIX, this.txtFldCurrConfigDir.getText());
+        this.configManager.getConfig().setProperty(ConfigManager.CURRENT_PREFIX + ConfigManager.SUFFIX,
+                this.txtFldCurrConfigDir.getText());
         try {
             this.configManager.save();
         } catch (ConfigurationException configurationException) {
@@ -79,6 +80,5 @@ public class FXMLController implements Initializable {
         btnEdit.setText(save);
         btnEdit.setOnAction(actionEventEventHandler);
     }
-
 
 }

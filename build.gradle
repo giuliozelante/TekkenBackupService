@@ -1,63 +1,65 @@
 plugins {
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.11'
-    id 'com.gluonhq.gluonfx-gradle-plugin' version '1.0.11'
-    id 'io.freefair.lombok' version '6.3.0'
-    id "com.palantir.graal" version "0.10.0"
-    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+    id 'org.openjfx.javafxplugin' version '0.0.14'
+    id 'com.gluonhq.gluonfx-gradle-plugin' version '1.0.19'
+    id 'org.beryx.jlink' version '2.26.0'
+    id 'com.github.ben-manes.versions' version "0.47.0"
+    id("com.palantir.graal") version "0.12.0"
 }
-
-// import org.apache.tools.ant.taskdefs.condition.Os
-
-javafx {
-    version = '16'
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
-}
-
-group 'org.gzelante'
-version '0.0.1-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
-run {
-    jvmArgs=["-agentlib:native-image-agent=config-merge-dir=src/main/resources/META-INF/native-image"]
+javafx {
+    version = javafxVersion
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
 dependencies {
-    implementation group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.4'
-    implementation group: 'org.apache.commons', name: 'commons-configuration2', version: '2.7'
-    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.14.1'
-    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.14.1'
-    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    implementation "commons-beanutils:commons-beanutils:${commonsBeanutilsVersion}"
+    implementation "org.apache.commons:commons-configuration2:${commonsConfiguration2Version}"
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    runtimeOnly "ch.qos.logback:logback-classic:${logbackClassicVersion}"
+    testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    testImplementation "junit:junit:${junitVersion}"
 }
 
-mainClassName = 'org.gzelante.tbs.MainApp'
-// graalvmHome = "C:\\Users\\neo16\\scoop\\apps\\graalvm-lts-jdk11\\current\\"
-/*
-graal {
-    mainClass 'org.gzelante.tbs.MainApp'
-    outputName 'tekken-backup-service'
-    graalVersion "21.0.0.2"
-    javaVersion "11"
+application {
+    mainClass = 'org.gzelante.tbs.MainApp'
+    applicationDefaultJvmArgs = [
+            '-agentlib:native-image-agent=config-merge-dir=src/main/resources/META-INF/native-image'
+    ]
+}
 
-    //option "--no-fallback"
-    //option "--allow-incomplete-classpath"
-
-    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-        // May be possible without, but autodetection is problematic on Windows 10
-        // see https://github.com/palantir/gradle-graal
-        // see https://www.graalvm.org/docs/reference-manual/native-image/#prerequisites
-        windowsVsVarsPath("G:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat")
+jlink {
+    launcher {
+        name = 'TekkenBackupService'
     }
 }
 
+run {
+    jvmArgs = [
+            '-agentlib:native-image-agent=config-merge-dir=src/main/resources/META-INF/native-image',
+            '-XshowSettings:all'
+    ]
+}
 
-nativeCompile.doFirst {
-    ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "echo", "\"inizio programma\"")
-    Map<String, String> env = processBuilder.environment()
-    env.each { k,v -> println "$k : $v" }
-    env.put("GRAALVM_HOME", "C:\\Users\\neo16\\scoop\\apps\\graalvm-lts-jdk11\\current\\")
-    processBuilder.start().waitFor()
-}*/
+// Configure GraalVM.
+graal {
+    mainClass 'org.gzelante.tbs.MainApp'
+    outputName 'tekken-backup-service'
+    graalVersion "${graalVersion}"
+    javaVersion '11'
+
+    option '--no-fallback'
+    option '--allow-incomplete-classpath'
+
+    // On Windows, provide the path to the VC++ build tools.
+    if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
+        windowsVsVarsPath('C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Auxiliary/Build/vcvars64.bat')
+    }
+}
