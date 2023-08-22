@@ -4,8 +4,8 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.14'
     id 'com.gluonhq.gluonfx-gradle-plugin' version '1.0.19'
     id 'org.beryx.jlink' version '2.26.0'
-    id 'com.github.ben-manes.versions' version "0.47.0"
-    id("com.palantir.graal") version "0.12.0"
+    id 'com.github.ben-manes.versions' version '0.47.0'
+    id 'com.palantir.graal' version '0.12.0'
 }
 
 repositories {
@@ -14,13 +14,13 @@ repositories {
 
 javafx {
     version = javafxVersion
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
+    modules = ['javafx.controls', 'javafx.fxml']
 }
 
 dependencies {
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-    implementation "commons-beanutils:commons-beanutils:${commonsBeanutilsVersion}"
-    implementation "org.apache.commons:commons-configuration2:${commonsConfiguration2Version}"
+    implementation "commons-beanutils:commons-beanutils:${commonsBeanutilsVersion}",
+        "org.apache.commons:commons-configuration2:${commonsConfiguration2Version}"
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     runtimeOnly "ch.qos.logback:logback-classic:${logbackClassicVersion}"
     testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
@@ -53,7 +53,7 @@ graal {
     mainClass 'org.gzelante.tbs.MainApp'
     outputName 'tekken-backup-service'
     graalVersion "${graalVersion}"
-    javaVersion '11'
+    javaVersion '17'
 
     option '--no-fallback'
     option '--allow-incomplete-classpath'
