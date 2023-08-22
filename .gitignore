@@ -1,4 +1,4 @@
-# Created by .ignore support plugin (hsz.mobi)
+### # Created by .ignore support plugin (hsz.mobi)
 ### JEnv template
 # JEnv local Java version configuration file
 .java-version
@@ -11,7 +11,7 @@
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff
-.idea
+.idea/
 *.iml
 *.ipr
 
@@ -37,7 +37,7 @@ crashlytics-build.properties
 fabric.properties
 
 ### Gradle template
-.gradle
+.gradle/
 **/build/
 !src/**/build/
 
@@ -54,7 +54,7 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 
 ### Eclipse template
-.metadata
+.metadata/
 bin/
 tmp/
 *.tmp
@@ -64,7 +64,7 @@ tmp/
 local.properties
 .settings/
 .loadpath
-.recommenders
+.recommenders/
 
 # External tool builders
 .externalToolBuilders/
@@ -129,6 +129,7 @@ javadoc/
 
 # lock file, a part of Oracle Credential Store Framework
 cwallet.sso.lck
+
 ### Java template
 # Compiled class file
 *.class
@@ -154,5 +155,8 @@ cwallet.sso.lck
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
+# Exclude test directory
 src/test/
+
+# Exclude config.properties file
 config.properties
