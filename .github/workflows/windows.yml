@@ -2,13 +2,19 @@ name: Windows
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - name: Setup GraalVM environment
+        uses: gluonhq/setup-graalvm@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          graalvm: '22.1.0.1-Final'
 
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.0.2
@@ -16,19 +22,14 @@ jobs:
       - name: Visual Studio shell
         uses: egor-tensin/vs-shell@v1
 
-      - name: Setup GraalVM environment
-        uses: DeLaGuardo/setup-graalvm@master
-        with:
-          graalvm-version: 20.3.0.java11
-
       - name: Make staging directory
         run: mkdir staging
 
-      - name: Gluon License
-        uses: gluonhq/gluon-build-license@v1
-        with:
-          gluon-license: ${{ secrets.GLUON_LICENSE }}
-          
+      # - name: Gluon License
+      #   uses: gluonhq/gluon-build-license@v1
+      #   with:
+      #     gluon-license: ${{ secrets.GLUON_LICENSE }}
+
       - name: Build with Gradle
         run: ./gradlew build
 
@@ -49,7 +50,7 @@ jobs:
         with:
           path: staging
 
-      # upload it to the release corresponding to the current Git tag (2)
+      # upload it to the release corresponding to the current Git tag
       - name: Create GitHub release
         uses: softprops/action-gh-release@v1
         with:

@@ -13,19 +13,18 @@ repositories {
 }
 
 javafx {
-    version = javafxVersion
+    version = '17'
     modules = ['javafx.controls', 'javafx.fxml']
 }
 
 dependencies {
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-    implementation "commons-beanutils:commons-beanutils:${commonsBeanutilsVersion}",
-        "org.apache.commons:commons-configuration2:${commonsConfiguration2Version}"
-    compileOnly "org.projectlombok:lombok:${lombokVersion}"
-    runtimeOnly "ch.qos.logback:logback-classic:${logbackClassicVersion}"
-    testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
-    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-    testImplementation "junit:junit:${junitVersion}"
+    annotationProcessor 'org.projectlombok:lombok:1.18.26'
+    implementation 'commons-beanutils:commons-beanutils:1.9.4',
+            'org.apache.commons:commons-configuration2:2.8.0',
+            'ch.qos.logback:logback-core:1.4.7',
+            'ch.qos.logback:logback-classic:1.4.7',
+            'org.slf4j:slf4j-api:2.0.5'
+    compileOnly 'org.projectlombok:lombok:1.18.26'
 }
 
 application {
@@ -39,6 +38,7 @@ jlink {
     launcher {
         name = 'TekkenBackupService'
     }
+    // modulePath = ['path/to/module/dependencies']
 }
 
 run {
@@ -50,16 +50,21 @@ run {
 
 // Configure GraalVM.
 graal {
-    mainClass 'org.gzelante.tbs.MainApp'
-    outputName 'tekken-backup-service'
-    graalVersion "${graalVersion}"
-    javaVersion '17'
+    // mainClass = 'org.gzelante.tbs.MainApp'
+    // outputName = 'tekken-backup-service'
+//    graalVersion = '21.3.0'
+//    javaVersion = '17'
 
-    option '--no-fallback'
-    option '--allow-incomplete-classpath'
+    option('--no-fallback')
+    option('--allow-incomplete-classpath')
 
     // On Windows, provide the path to the VC++ build tools.
-    if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
-        windowsVsVarsPath('C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Auxiliary/Build/vcvars64.bat')
+    if (System.getProperty('os.name').toLowerCase().contains('windows')) {
+        def vcVarsPath = System.getenv('VC_VARS_PATH')
+        if (vcVarsPath != null) {
+            windowsVsVarsPath(vcVarsPath)
+        } else {
+            throw new IllegalStateException('VC_VARS_PATH environment variable is not set.')
+        }
     }
 }
