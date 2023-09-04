@@ -37,7 +37,7 @@ jobs:
         run: ./gradlew package
 
       - name: Copy native client to staging
-        run: cp -r build/libs/<project_name>.jar staging
+        run: cp -r build/libs/TekkenBackupService.jar staging
 
       - name: Upload
         uses: actions/upload-artifact@v2
