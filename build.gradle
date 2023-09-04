@@ -1,9 +1,9 @@
 plugins {
     id 'application'
-    id 'com.github.johnrengelman.shadow' version '8.1.1'
     id 'org.openjfx.javafxplugin' version '0.0.14'
     id 'com.gluonhq.gluonfx-gradle-plugin' version '1.0.19'
     id 'com.github.ben-manes.versions' version '0.47.0'
+    //id 'org.beryx.jlink' version '2.26.0'
 }
 
 mainClassName = 'org.gzelante.tbs.MainApp'
@@ -16,18 +16,18 @@ repositories {
 }
 
 javafx {
-    version = "20"
+    version = '20'
     modules = ['javafx.controls', 'javafx.fxml']
 }
 
 dependencies {
-    annotationProcessor 'org.projectlombok:lombok:1.18.26'
+    annotationProcessor 'org.projectlombok:lombok:1.18.28'
     implementation 'commons-beanutils:commons-beanutils:1.9.4',
-            'org.apache.commons:commons-configuration2:2.8.0',
-            'ch.qos.logback:logback-core:1.4.7',
-            'ch.qos.logback:logback-classic:1.4.7',
-            'org.slf4j:slf4j-api:2.0.5'
-    compileOnly 'org.projectlombok:lombok:1.18.26'
+            'org.apache.commons:commons-configuration2:2.9.0',
+            'ch.qos.logback:logback-core:1.4.11',
+            'ch.qos.logback:logback-classic:1.4.11',
+            'org.slf4j:slf4j-api:2.0.9'
+    compileOnly 'org.projectlombok:lombok:1.18.28'
 }
 
 // application {
