@@ -63,7 +63,6 @@ cwallet.sso.lck
 **/build/
 !src/**/build/
 gradle-app.setting
-!gradle-wrapper.jar
 .gradletasknamecache
 
 # Java template
@@ -73,6 +72,7 @@ gradle-app.setting
 
 # Package Files
 *.jar
+!gradle-wrapper.jar
 *.war
 *.nar
 *.ear
