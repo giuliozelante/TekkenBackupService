@@ -35,10 +35,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Build with Gradle
-        run: ./gradlew build
-
-      - name: Package with Gradle
-        run: ./gradlew package
+        run: ./gradlew build nativeBuild
 
       - name: Copy native bundles to staging
         run: cp -r target/gluonfx/x86_64-windows/TekkenBackupService.exe staging
