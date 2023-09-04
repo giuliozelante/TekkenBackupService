@@ -8,19 +8,18 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup GraalVM environment
-        uses: gluonhq/setup-graalvm@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          graalvm: '22.1.0.1-Final'
+      - uses: actions/checkout@v2
 
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.0.2
 
       - name: Visual Studio shell
         uses: egor-tensin/vs-shell@v1
+
+      - name: Setup Gluon's GraalVM
+        uses: gluonhq/setup-graalvm@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Make staging directory
         run: mkdir staging
@@ -30,14 +29,17 @@ jobs:
       #   with:
       #     gluon-license: ${{ secrets.GLUON_LICENSE }}
 
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
       - name: Build with Gradle
         run: ./gradlew build
 
       - name: Package with Gradle
         run: ./gradlew package
 
-      - name: Copy native client to staging
-        run: cp -r build/libs/TekkenBackupService.jar staging
+      - name: Copy native bundles to staging
+        run: cp -r target/gluonfx/x86_64-windows/TekkenBackupService.exe staging
 
       - name: Upload
         uses: actions/upload-artifact@v2

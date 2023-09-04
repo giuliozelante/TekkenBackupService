@@ -27,6 +27,9 @@ jobs:
       #   with:
       #     gluon-license: ${{ secrets.GLUON_LICENSE }}
 
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
       - name: Build with Gradle
         run: ./gradlew build
 
@@ -34,7 +37,7 @@ jobs:
         run: ./gradlew package
 
       - name: Copy native client to staging
-        run: cp -r build/libs/TekkenBackupService.jar staging
+        run: cp -r target/gluonfx/x86_64-macos/TekkenBackupService.* staging
 
       - name: Upload
         uses: actions/upload-artifact@v2
