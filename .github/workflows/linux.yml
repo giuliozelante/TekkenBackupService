@@ -37,7 +37,7 @@ jobs:
         run: ./gradlew build nativeBuild
 
       - name: Copy native client to staging
-        run: cp -r target/gluonfx/x86_64-linux/TekkenBackupService* staging
+        run: cp -r build/gluonfx/x86_64-linux/TekkenBackupService* staging
 
       - name: Upload
         uses: actions/upload-artifact@v2
