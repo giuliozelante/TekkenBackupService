@@ -2,7 +2,8 @@ name: MacOS
 
 on:
   push:
-    branches: [main]
+    tags:
+      - '*'
   workflow_dispatch:
 
 jobs:
@@ -56,8 +57,8 @@ jobs:
 
       # upload it to the release corresponding to the current Git tag
       - name: Create GitHub release
-        uses: softprops/action-gh-release@v1
+        uses: ncipollo/release-action@v1
         with:
-          files: TekkenBackupService*
+          artifacts: TekkenBackupService*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
