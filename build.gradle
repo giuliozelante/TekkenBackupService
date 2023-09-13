@@ -4,6 +4,7 @@ plugins {
     id 'com.gluonhq.gluonfx-gradle-plugin' version '1.0.19'
     id 'com.github.ben-manes.versions' version '0.47.0'
     id 'fr.brouillard.oss.gradle.jgitver' version '0.10.0-rc03'
+    id 'org.graalvm.buildtools.native' version '0.9.26'
 }
 
 mainClassName = 'org.gzelante.tbs.MainApp'
@@ -30,33 +31,33 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.28'
 }
 
-application {
-     mainClass = 'org.gzelante.tbs.MainApp'
-     applicationDefaultJvmArgs = [
-            '-agentlib:native-image-agent=config-merge-dir=src/main/resources/META-INF/native-image'
-     ]
- }
+// application {
+//      mainClass = 'org.gzelante.tbs.MainApp'
+//      applicationDefaultJvmArgs = [
+//             '-agentlib:native-image-agent=config-merge-dir=src/main/resources/META-INF/native-image'
+//      ]
+//  }
 
-run {
-    jvmArgs = [
-            '-agentlib:native-image-agent=config-merge-dir=src/main/resources/META-INF/native-image',
-            '-XshowSettings:all'
-    ]
-}
+// run {
+//     jvmArgs = [
+//             '-agentlib:native-image-agent=config-merge-dir=src/main/resources/META-INF/native-image',
+//             '-XshowSettings:all'
+//     ]
+// }
 
-graal {
-     mainClass = 'org.gzelante.tbs.MainApp'
-     outputName = 'tekken-backup-service'
+// graal {
+//      mainClass = 'org.gzelante.tbs.MainApp'
+//      outputName = 'tekken-backup-service'
 
-     option('--no-fallback')
-     option('--allow-incomplete-classpath')
+//      option('--no-fallback')
+//      option('--allow-incomplete-classpath')
 
-     if (System.getProperty('os.name').toLowerCase().contains('windows')) {
-         def vcVarsPath = System.getenv('VC_VARS_PATH')
-         if (vcVarsPath != null) {
-             windowsVsVarsPath(vcVarsPath)
-         } else {
-             throw new IllegalStateException('VC_VARS_PATH environment variable is not set.')
-         }
-     }
-}
+//      if (System.getProperty('os.name').toLowerCase().contains('windows')) {
+//          def vcVarsPath = System.getenv('VC_VARS_PATH')
+//          if (vcVarsPath != null) {
+//              windowsVsVarsPath(vcVarsPath)
+//          } else {
+//              throw new IllegalStateException('VC_VARS_PATH environment variable is not set.')
+//          }
+//      }
+// }
