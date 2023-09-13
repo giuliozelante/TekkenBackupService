@@ -4,14 +4,18 @@ plugins {
     id 'com.gluonhq.gluonfx-gradle-plugin' version '1.0.19'
     id 'com.github.ben-manes.versions' version '0.47.0'
     id 'fr.brouillard.oss.gradle.jgitver' version '0.10.0-rc03'
+<<<<<<< Updated upstream
     //id 'org.beryx.jlink' version '2.26.0'
+=======
+    id 'org.beryx.runtime' version '1.12.5'
+>>>>>>> Stashed changes
 }
 
 mainClassName = 'org.gzelante.tbs.MainApp'
 
 repositories {
     mavenCentral()
-     maven {
+    maven {
         url 'https://nexus.gluonhq.com/nexus/content/repositories/releases'
     }
 }
@@ -31,6 +35,7 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.28'
 }
 
+<<<<<<< Updated upstream
 // application {
 //     mainClass = 'org.gzelante.tbs.MainApp'
 //     applicationDefaultJvmArgs = [
@@ -51,9 +56,19 @@ dependencies {
 //             '-XshowSettings:all'
 //     ]
 // }
+=======
+application {
+    mainClass = 'org.gzelante.tbs.MainApp'
+    applicationDefaultJvmArgs = [
+            '-agentlib:native-image-agent=config-merge-dir=src/main/resources/META-INF/native-image'
+    ]
+}
+
+>>>>>>> Stashed changes
 
 // Configure GraalVM.
 // graal {
+<<<<<<< Updated upstream
 //     // mainClass = 'org.gzelante.tbs.MainApp'
 //     // outputName = 'tekken-backup-service'
 
@@ -61,6 +76,14 @@ dependencies {
 //     option('--allow-incomplete-classpath')
 
 //     // On Windows, provide the path to the VC++ build tools.
+=======
+//     mainClass 'org.gzelante.tbs.MainApp'
+//     outputName 'tekken-backup-service'
+
+//     option '--no-fallback'
+//     option '--allow-incomplete-classpath'
+
+>>>>>>> Stashed changes
 //     if (System.getProperty('os.name').toLowerCase().contains('windows')) {
 //         def vcVarsPath = System.getenv('VC_VARS_PATH')
 //         if (vcVarsPath != null) {

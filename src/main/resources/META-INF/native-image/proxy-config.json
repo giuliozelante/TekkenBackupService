@@ -1,5 +1,5 @@
 [
   {
-    "interfaces":["org.apache.commons.configuration2.builder.fluent.PropertiesBuilderParameters","org.apache.commons.configuration2.builder.fluent.FileBasedBuilderParameters"]}
-  
+    "interfaces":["org.apache.commons.configuration2.builder.fluent.PropertiesBuilderParameters","org.apache.commons.configuration2.builder.fluent.FileBasedBuilderParameters"]
+  }
 ]

@@ -1,54 +1,64 @@
 {
   "resources":{
-  "includes":[
-    {
-      "pattern":"\\QMETA-INF/org/apache/logging/log4j/core/config/plugins/Log4j2Plugins.dat\\E"
-    }, 
-    {
-      "pattern":"\\QMETA-INF/services/ch.qos.logback.classic.spi.Configurator\\E"
-    }, 
-    {
-      "pattern":"\\QMETA-INF/services/org.apache.logging.log4j.core.util.ContextDataProvider\\E"
-    }, 
-    {
-      "pattern":"\\QMETA-INF/services/org.apache.logging.log4j.spi.Provider\\E"
-    }, 
-    {
-      "pattern":"\\QMETA-INF/services/org.apache.logging.log4j.util.PropertySource\\E"
-    }, 
-    {
-      "pattern":"\\QMETA-INF/services/org.slf4j.spi.SLF4JServiceProvider\\E"
-    }, 
-    {
-      "pattern":"\\Qlogback.xml\\E"
-    }, 
-    {
-      "pattern":"\\Qorg/gzelante/tbs/scene.fxml\\E"
-    }
-  ]},
-  "bundles":[
-    {
-      "name":"com.sun.javafx.tk.quantum.QuantumMessagesBundle",
-      "locales":[
-        "", 
-        "it", 
-        "und"
-      ]
-    }, 
-    {
-      "name":"com/sun/glass/ui/win/themes",
-      "locales":[
-        "it", 
-        "und"
-      ]
-    }, 
-    {
-      "name":"com/sun/javafx/scene/control/skin/resources/controls",
-      "locales":[
-        "", 
-        "it", 
-        "und"
-      ]
-    }
-  ]
+  "includes":[{
+    "pattern":"\\QMETA-INF/org/apache/logging/log4j/core/config/plugins/Log4j2Plugins.dat\\E"
+  }, {
+    "pattern":"\\QMETA-INF/services/ch.qos.logback.classic.spi.Configurator\\E"
+  }, {
+    "pattern":"\\QMETA-INF/services/org.apache.logging.log4j.core.util.ContextDataProvider\\E"
+  }, {
+    "pattern":"\\QMETA-INF/services/org.apache.logging.log4j.spi.Provider\\E"
+  }, {
+    "pattern":"\\QMETA-INF/services/org.apache.logging.log4j.util.PropertySource\\E"
+  }, {
+    "pattern":"\\QMETA-INF/services/org.slf4j.spi.SLF4JServiceProvider\\E"
+  }, {
+    "pattern":"\\Qlogback.xml\\E"
+  }, {
+    "pattern":"\\Qorg/gzelante/tbs/scene.fxml\\E"
+  }, {
+    "pattern":"java.base:\\Qjdk/internal/icu/impl/data/icudt72b/ubidi.icu\\E"
+  }, {
+    "pattern":"javafx.base:\\Qcom/sun/javafx/reflect/Trampoline.class\\E"
+  }, {
+    "pattern":"javafx.controls:\\Qcom/sun/javafx/scene/control/skin/modena/modena.bss\\E"
+  }, {
+    "pattern":"javafx.graphics:\\Qcom/sun/glass/utils/NativeLibLoader.class\\E"
+  }, {
+    "pattern":"javafx.graphics:\\Qcom/sun/prism/es2/glsl/FillPgram_Color.frag\\E"
+  }, {
+    "pattern":"javafx.graphics:\\Qcom/sun/prism/es2/glsl/FillPgram_LinearGradient_PAD.frag\\E"
+  }, {
+    "pattern":"javafx.graphics:\\Qcom/sun/prism/es2/glsl/Solid_TextureFirstPassLCD.frag\\E"
+  }, {
+    "pattern":"javafx.graphics:\\Qcom/sun/prism/es2/glsl/Solid_TextureRGB.frag\\E"
+  }, {
+    "pattern":"javafx.graphics:\\Qcom/sun/prism/es2/glsl/Solid_TextureSecondPassLCD.frag\\E"
+  }, {
+    "pattern":"javafx.graphics:\\Qcom/sun/prism/es2/glsl/Texture_Color.frag\\E"
+  }, {
+    "pattern":"javafx.graphics:\\Qcom/sun/prism/es2/glsl/Texture_LinearGradient_PAD.frag\\E"
+  }, {
+    "pattern":"javafx.graphics:\\Qlibglass.so\\E"
+  }, {
+    "pattern":"javafx.graphics:\\Qlibglassgtk3.so\\E"
+  }, {
+    "pattern":"javafx.graphics:\\Qlibjavafx_font.so\\E"
+  }, {
+    "pattern":"javafx.graphics:\\Qlibjavafx_font_freetype.so\\E"
+  }, {
+    "pattern":"javafx.graphics:\\Qlibjavafx_font_pango.so\\E"
+  }, {
+    "pattern":"javafx.graphics:\\Qlibprism_es2.so\\E"
+  }]},
+  "bundles":[{
+    "name":"com.sun.javafx.tk.quantum.QuantumMessagesBundle",
+    "locales":["", "it", "und"]
+  }, {
+    "name":"com/sun/glass/ui/win/themes",
+    "locales":["it", "und"]
+  }, {
+    "name":"com/sun/javafx/scene/control/skin/resources/controls",
+    "locales":["", "it", "und"]
+  }]
 }

@@ -89,6 +89,10 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"ch.qos.logback.classic.joran.SerializedModelConfigurator",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
   "name":"ch.qos.logback.classic.pattern.DateConverter",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
@@ -113,6 +117,10 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"ch.qos.logback.classic.util.DefaultJoranConfigurator",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
   "name":"ch.qos.logback.core.ConsoleAppender",
   "queryAllPublicMethods":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
@@ -122,12 +130,20 @@
   "methods":[{"name":"setEncoder","parameterTypes":["ch.qos.logback.core.encoder.Encoder"] }]
 },
 {
+  "name":"ch.qos.logback.core.encoder.Encoder",
+  "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
+},
+{
   "name":"ch.qos.logback.core.encoder.LayoutWrappingEncoder",
   "methods":[{"name":"setParent","parameterTypes":["ch.qos.logback.core.spi.ContextAware"] }]
 },
 {
   "name":"ch.qos.logback.core.pattern.PatternLayoutEncoderBase",
   "methods":[{"name":"setPattern","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"ch.qos.logback.core.spi.ContextAware",
+  "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
 },
 {
   "name":"com.sun.glass.ui.Screen"
@@ -220,10 +236,7 @@
 },
 {
   "name":"com.sun.prism.GraphicsPipeline",
-  "methods":[
-    {"name":"getFontFactory","parameterTypes":[] }, 
-    {"name":"getPipeline","parameterTypes":[] }
-  ]
+  "methods":[{"name":"getFontFactory","parameterTypes":[] }, {"name":"getPipeline","parameterTypes":[] }]
 },
 {
   "name":"com.sun.prism.d3d.D3DPipeline",
@@ -366,6 +379,10 @@
   "name":"java.lang.String"
 },
 {
+  "name":"java.lang.Thread",
+  "fields":[{"name":"threadLocalRandomProbe"}]
+},
+{
   "name":"java.lang.Throwable",
   "methods":[{"name":"initCause","parameterTypes":["java.lang.Throwable"] }]
 },
@@ -416,12 +433,7 @@
 {
   "name":"java.lang.management.PlatformLoggingMXBean",
   "queryAllPublicMethods":true,
-  "methods":[
-    {"name":"getLoggerLevel","parameterTypes":["java.lang.String"] }, 
-    {"name":"getLoggerNames","parameterTypes":[] }, 
-    {"name":"getParentLoggerName","parameterTypes":["java.lang.String"] }, 
-    {"name":"setLoggerLevel","parameterTypes":["java.lang.String","java.lang.String"] }
-  ]
+  "methods":[{"name":"getLoggerLevel","parameterTypes":["java.lang.String"] }, {"name":"getLoggerNames","parameterTypes":[] }, {"name":"getParentLoggerName","parameterTypes":["java.lang.String"] }, {"name":"setLoggerLevel","parameterTypes":["java.lang.String","java.lang.String"] }]
 },
 {
   "name":"java.lang.management.RuntimeMXBean",
@@ -473,6 +485,18 @@
   "methods":[{"name":"<init>","parameterTypes":["java.lang.String","java.lang.String"] }]
 },
 {
+  "name":"java.util.concurrent.atomic.AtomicBoolean",
+  "fields":[{"name":"value"}]
+},
+{
+  "name":"java.util.concurrent.atomic.AtomicReference",
+  "fields":[{"name":"value"}]
+},
+{
+  "name":"java.util.concurrent.atomic.Striped64",
+  "fields":[{"name":"base"}, {"name":"cellsBusy"}]
+},
+{
   "name":"java.util.logging.LogManager",
   "methods":[{"name":"getLoggingMXBean","parameterTypes":[] }]
 },
@@ -495,14 +519,16 @@
 },
 {
   "name":"javafx.scene.Node",
-  "allDeclaredMethods":true
+  "allDeclaredMethods":true,
+  "methods":[{"name":"getId","parameterTypes":[] }, {"name":"setDisable","parameterTypes":["boolean"] }, {"name":"setId","parameterTypes":["java.lang.String"] }]
 },
 {
   "name":"javafx.scene.ParallelCamera"
 },
 {
   "name":"javafx.scene.Parent",
-  "allDeclaredMethods":true
+  "allDeclaredMethods":true,
+  "methods":[{"name":"getStylesheets","parameterTypes":[] }]
 },
 {
   "name":"javafx.scene.Scene"
@@ -510,7 +536,8 @@
 {
   "name":"javafx.scene.control.Button",
   "allDeclaredMethods":true,
-  "allPublicConstructors":true
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"javafx.scene.control.ButtonBase",
@@ -523,16 +550,19 @@
 {
   "name":"javafx.scene.control.Label",
   "allDeclaredMethods":true,
-  "allPublicConstructors":true
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"javafx.scene.control.Labeled",
-  "allDeclaredMethods":true
+  "allDeclaredMethods":true,
+  "methods":[{"name":"setText","parameterTypes":["java.lang.String"] }]
 },
 {
   "name":"javafx.scene.control.TextField",
   "allDeclaredMethods":true,
-  "allPublicConstructors":true
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"javafx.scene.control.TextInputControl",
@@ -544,7 +574,8 @@
 {
   "name":"javafx.scene.layout.ColumnConstraints",
   "allDeclaredMethods":true,
-  "allPublicConstructors":true
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"setPercentWidth","parameterTypes":["double"] }]
 },
 {
   "name":"javafx.scene.layout.ConstraintsBase",
@@ -554,14 +585,12 @@
   "name":"javafx.scene.layout.GridPane",
   "allDeclaredMethods":true,
   "allPublicConstructors":true,
-  "methods":[
-    {"name":"getColumnIndex","parameterTypes":["javafx.scene.Node"] }, 
-    {"name":"getRowIndex","parameterTypes":["javafx.scene.Node"] }
-  ]
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"getColumnConstraints","parameterTypes":[] }, {"name":"getColumnIndex","parameterTypes":["javafx.scene.Node"] }, {"name":"getColumnIndex","parameterTypes":["javafx.scene.Parent"] }, {"name":"getColumnIndex","parameterTypes":["javafx.scene.control.Button"] }, {"name":"getColumnIndex","parameterTypes":["javafx.scene.control.ButtonBase"] }, {"name":"getColumnIndex","parameterTypes":["javafx.scene.control.Control"] }, {"name":"getColumnIndex","parameterTypes":["javafx.scene.control.Labeled"] }, {"name":"getColumnIndex","parameterTypes":["javafx.scene.control.Skinnable"] }, {"name":"getColumnIndex","parameterTypes":["javafx.scene.control.TextField"] }, {"name":"getColumnIndex","parameterTypes":["javafx.scene.control.TextInputControl"] }, {"name":"getColumnIndex","parameterTypes":["javafx.scene.layout.Region"] }, {"name":"getRowConstraints","parameterTypes":[] }, {"name":"getRowIndex","parameterTypes":["javafx.scene.Node"] }, {"name":"getRowIndex","parameterTypes":["javafx.scene.Parent"] }, {"name":"getRowIndex","parameterTypes":["javafx.scene.control.Control"] }, {"name":"getRowIndex","parameterTypes":["javafx.scene.control.Label"] }, {"name":"getRowIndex","parameterTypes":["javafx.scene.control.Labeled"] }, {"name":"getRowIndex","parameterTypes":["javafx.scene.control.Skinnable"] }, {"name":"getRowIndex","parameterTypes":["javafx.scene.layout.Region"] }, {"name":"isColumnIndex","parameterTypes":["javafx.scene.Parent"] }, {"name":"isColumnIndex","parameterTypes":["javafx.scene.control.Button"] }, {"name":"isColumnIndex","parameterTypes":["javafx.scene.control.ButtonBase"] }, {"name":"isColumnIndex","parameterTypes":["javafx.scene.control.Control"] }, {"name":"isColumnIndex","parameterTypes":["javafx.scene.control.Labeled"] }, {"name":"isColumnIndex","parameterTypes":["javafx.scene.control.Skinnable"] }, {"name":"isColumnIndex","parameterTypes":["javafx.scene.control.TextField"] }, {"name":"isColumnIndex","parameterTypes":["javafx.scene.control.TextInputControl"] }, {"name":"isColumnIndex","parameterTypes":["javafx.scene.layout.Region"] }, {"name":"isRowIndex","parameterTypes":["javafx.scene.Parent"] }, {"name":"isRowIndex","parameterTypes":["javafx.scene.control.Control"] }, {"name":"isRowIndex","parameterTypes":["javafx.scene.control.Label"] }, {"name":"isRowIndex","parameterTypes":["javafx.scene.control.Labeled"] }, {"name":"isRowIndex","parameterTypes":["javafx.scene.control.Skinnable"] }, {"name":"isRowIndex","parameterTypes":["javafx.scene.layout.Region"] }, {"name":"setAlignment","parameterTypes":["javafx.geometry.Pos"] }, {"name":"setColumnIndex","parameterTypes":["java.lang.Object","java.lang.String"] }, {"name":"setColumnIndex","parameterTypes":["javafx.css.Styleable","java.lang.String"] }, {"name":"setColumnIndex","parameterTypes":["javafx.event.EventTarget","java.lang.String"] }, {"name":"setColumnIndex","parameterTypes":["javafx.scene.Node","java.lang.Integer"] }, {"name":"setColumnIndex","parameterTypes":["javafx.scene.Node","java.lang.String"] }, {"name":"setColumnIndex","parameterTypes":["javafx.scene.Parent","java.lang.Integer"] }, {"name":"setColumnIndex","parameterTypes":["javafx.scene.Parent","java.lang.String"] }, {"name":"setColumnIndex","parameterTypes":["javafx.scene.control.Button","java.lang.Integer"] }, {"name":"setColumnIndex","parameterTypes":["javafx.scene.control.Button","java.lang.String"] }, {"name":"setColumnIndex","parameterTypes":["javafx.scene.control.ButtonBase","java.lang.Integer"] }, {"name":"setColumnIndex","parameterTypes":["javafx.scene.control.ButtonBase","java.lang.String"] }, {"name":"setColumnIndex","parameterTypes":["javafx.scene.control.Control","java.lang.Integer"] }, {"name":"setColumnIndex","parameterTypes":["javafx.scene.control.Control","java.lang.String"] }, {"name":"setColumnIndex","parameterTypes":["javafx.scene.control.Labeled","java.lang.Integer"] }, {"name":"setColumnIndex","parameterTypes":["javafx.scene.control.Labeled","java.lang.String"] }, {"name":"setColumnIndex","parameterTypes":["javafx.scene.control.Skinnable","java.lang.Integer"] }, {"name":"setColumnIndex","parameterTypes":["javafx.scene.control.Skinnable","java.lang.String"] }, {"name":"setColumnIndex","parameterTypes":["javafx.scene.control.TextField","java.lang.Integer"] }, {"name":"setColumnIndex","parameterTypes":["javafx.scene.control.TextField","java.lang.String"] }, {"name":"setColumnIndex","parameterTypes":["javafx.scene.control.TextInputControl","java.lang.Integer"] }, {"name":"setColumnIndex","parameterTypes":["javafx.scene.control.TextInputControl","java.lang.String"] }, {"name":"setColumnIndex","parameterTypes":["javafx.scene.layout.Region","java.lang.Integer"] }, {"name":"setColumnIndex","parameterTypes":["javafx.scene.layout.Region","java.lang.String"] }, {"name":"setHgap","parameterTypes":["double"] }, {"name":"setRowIndex","parameterTypes":["java.lang.Object","java.lang.String"] }, {"name":"setRowIndex","parameterTypes":["javafx.css.Styleable","java.lang.String"] }, {"name":"setRowIndex","parameterTypes":["javafx.event.EventTarget","java.lang.String"] }, {"name":"setRowIndex","parameterTypes":["javafx.scene.Node","java.lang.Integer"] }, {"name":"setRowIndex","parameterTypes":["javafx.scene.Node","java.lang.String"] }, {"name":"setRowIndex","parameterTypes":["javafx.scene.Parent","java.lang.Integer"] }, {"name":"setRowIndex","parameterTypes":["javafx.scene.Parent","java.lang.String"] }, {"name":"setRowIndex","parameterTypes":["javafx.scene.control.Control","java.lang.Integer"] }, {"name":"setRowIndex","parameterTypes":["javafx.scene.control.Control","java.lang.String"] }, {"name":"setRowIndex","parameterTypes":["javafx.scene.control.Label","java.lang.Integer"] }, {"name":"setRowIndex","parameterTypes":["javafx.scene.control.Label","java.lang.String"] }, {"name":"setRowIndex","parameterTypes":["javafx.scene.control.Labeled","java.lang.Integer"] }, {"name":"setRowIndex","parameterTypes":["javafx.scene.control.Labeled","java.lang.String"] }, {"name":"setRowIndex","parameterTypes":["javafx.scene.control.Skinnable","java.lang.Integer"] }, {"name":"setRowIndex","parameterTypes":["javafx.scene.control.Skinnable","java.lang.String"] }, {"name":"setRowIndex","parameterTypes":["javafx.scene.layout.Region","java.lang.Integer"] }, {"name":"setRowIndex","parameterTypes":["javafx.scene.layout.Region","java.lang.String"] }, {"name":"setVgap","parameterTypes":["double"] }]
 },
 {
   "name":"javafx.scene.layout.Pane",
-  "allDeclaredMethods":true
+  "allDeclaredMethods":true,
+  "methods":[{"name":"getChildren","parameterTypes":[] }]
 },
 {
   "name":"javafx.scene.layout.Region",
@@ -570,7 +599,8 @@
 {
   "name":"javafx.scene.layout.RowConstraints",
   "allDeclaredMethods":true,
-  "allPublicConstructors":true
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"setMinHeight","parameterTypes":["double"] }, {"name":"setPrefHeight","parameterTypes":["double"] }]
 },
 {
   "name":"javafx.scene.shape.LineTo"
@@ -598,6 +628,9 @@
 },
 {
   "name":"javafx.scene.transform.Transform"
+},
+{
+  "name":"javafx.scene.web.WebView"
 },
 {
   "name":"javafx.stage.PopupWindow"
@@ -634,6 +667,9 @@
   "name":"javax.management.openmbean.TabularData"
 },
 {
+  "name":"javax.smartcardio.CardPermission"
+},
+{
   "name":"jdk.management.jfr.ConfigurationInfo",
   "queryAllPublicMethods":true
 },
@@ -659,7 +695,8 @@
 },
 {
   "name":"org.apache.commons.configuration2.PropertiesConfiguration",
-  "allPublicConstructors":true
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"org.apache.commons.configuration2.builder.BuilderParameters",
@@ -674,7 +711,7 @@
 },
 {
   "name":"org.apache.commons.logging.impl.Jdk14Logger",
-  "methods":[{"name":"<init>","parameterTypes":["java.lang.String"] }]
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.String"] }, {"name":"setLogFactory","parameterTypes":["org.apache.commons.logging.LogFactory"] }]
 },
 {
   "name":"org.apache.commons.logging.impl.Log4JLogger"
@@ -1390,16 +1427,16 @@
   "queryAllPublicMethods":true
 },
 {
+  "name":"org.eclipse.swt.internal.gtk.OS"
+},
+{
   "name":"org.gzelante.tbs.FXMLController",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"org.gzelante.tbs.MainApp",
-  "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
-    {"name":"main","parameterTypes":["java.lang.String[]"] }
-  ]
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"main","parameterTypes":["java.lang.String[]"] }]
 },
 {
   "name":"sun.management.ClassLoadingImpl",
