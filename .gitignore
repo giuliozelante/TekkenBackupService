@@ -98,3 +98,4 @@ config.properties
 *.project
 *.classpath
 *.settings/
+*.env
