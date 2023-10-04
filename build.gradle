@@ -6,11 +6,12 @@ plugins {
     id 'fr.brouillard.oss.gradle.jgitver' version '0.10.0-rc03'
 }
 
-mainClassName = 'org.gzelante.tbs.MainApp'
-
+application {
+    mainClass.set('org.gzelante.tbs.MainApp')
+}
 repositories {
     mavenCentral()
-     maven {
+    maven {
         url 'https://nexus.gluonhq.com/nexus/content/repositories/releases'
     }
 }
